@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %} Apply {% endblock %}
+
+{% block main %}
+  <h2>Apply for NGO Service</h2>
+  <form>
+    <div class="mb-3">
+      <label for="location" class="form-label">Location:</label>
+      <select id="location-select" class="form-select">
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bangalore">Bangalore</option>
+      </select>
+    </div>
+  </form>
+  <div id="ngo-list"></div>
+
+  <script>
+    const ngos = [
+      { id: 1, name: "NGO1", location: "Mumbai", cause: "Education" },
+      { id: 2, name: "NGO2", location: "Delhi", cause: "Healthcare" },
+      { id: 3, name: "NGO3", location: "Mumbai", cause: "Environment" },
+      { id: 4, name: "NGO4", location: "Bangalore", cause: "Children's Welfare" },
+      { id: 5, name: "NGO5", location: "Delhi", cause: "Disaster Relief" }
+    ];
+
+    function getNgosByLocation(location) {
+      return ngos.filter(ngo => ngo.location === location);
+    }
+
+    const locationSelect = document.getElementById('location-select');
+    const ngoListDiv = document.getElementById('ngo-list');
+
+    locationSelect.addEventListener('change', (e) => {
+      const selectedLocation = e.target.value;
+      const ngosByLocation = getNgosByLocation(selectedLocation);
+      const ngoListHtml = ngosByLocation.map(ngo => `<p>${ngo.name} (${ngo.cause})</p>`).join('');
+      ngoListDiv.innerHTML = ngoListHtml;
+    });
+  </script>
+{% endblock %}

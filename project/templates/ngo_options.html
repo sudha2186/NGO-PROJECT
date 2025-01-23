@@ -1,0 +1,16 @@
+
+{% extends "layout.html" %}
+
+{% block title %} Select an NGO {% endblock %}
+
+{% block main %}
+  <h2>Select an NGO to apply to:</h2>
+  <ul>
+    {% for ngo in ngos %}
+      <li>
+        {{ ngo.name }} ({{ ngo.cause }})
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
